@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>omg-see</title>
+	</head>
+	
+	<body>	
+		<div id="output">
+			<textarea id="txtArea" rows="10" cols="70"></textarea>
+		</div>
+					
+		<script>
+			var textArea = document.getElementById('txtArea');
+			textArea.scrollTop = textArea.scrollHeight;
+			var ws;
+			
+			//open a new websocket
+			ws = new WebSocket("ws://localhost:8080/see");
+				
+			//callback when websocket connects
+			ws.onopen = function() {
+				console.log("ws.onopen()");
+			};
+			
+			//callback when websocket is closed
+			ws.onclose = function (e) {
+  				console.log("ws.onclose()")
+			};
+				
+			//callback when websocket receive a message from the server
+			ws.onmessage = function(e) {
+				console.log("ws.onmessage()");
+				textArea.value += e.data;
+			};
+		</script>
+	</body>
+</html>

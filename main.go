@@ -22,6 +22,10 @@ func main () {
 func See(ws *websocket.Conn) {
 	log.Printf("see %v\n", ws.Config())
 
+	// filtering the log by company name ..
+	// tail -f log.txt | grep '\[   \]'
+	
+	//streaming all log
 	cmd := exec.Command("tail", "-f", "/var/log/omg-switch.log")
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
